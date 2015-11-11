@@ -1,6 +1,4 @@
-echo # NetworkAnalysis >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git remote add origin https://github.com/dongericoyu/NetworkAnalysis.git
-git push -u origin master
+#title CUG and QAP Homework#
+git config --global core.editor "[your editor] -w"
+abcdefg
+sdfjsdhfkjsdjdhfkdjfhskdjfskjf
