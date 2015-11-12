@@ -8,6 +8,16 @@ g<-emon$HurrFrederic
 
 #Let's look at our network
 g
+windows()
+plot(g, displaylabels=T,edge.col="grey50",xpd=T)
+
+
+#Plot the EMONs
+par(mfrow=c(3,3))
+for(i in 1:length(emon))
+  plot(emon[[i]],main=names(emon)[i],edge.lwd="Frequency")
+
+plot(emon$MtStHelens %s% which(type=="State"), displaylabels=TRUE)
 
 #Executing
 
