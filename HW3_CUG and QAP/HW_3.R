@@ -26,18 +26,40 @@ plot(emon$MtStHelens %s% which(type=="State"), displaylabels=TRUE)
 
 #code reference:http://www.inside-r.org/packages/cran/sna/docs/cug.test
 
-##size
 
-q1a1<-cug.test(g,gtrans,cmode="size")
+#Explaining CUG test:
+
+
+##size: we control the size (the same # of nodes), and each edge is assumed be randomly seleced based same probability,
+#and we replicate for many times, and see whether the observered network is unique or not #very similar to permutaiton
+#An easy way to imtepret: the null hypothesis: the observed network is randomly created given conditions
+
+##Butt 2007: "the CUG test is a test of the hypothesis that an observed statistics, s(g),
+#was drawn from the distribution of s arising from the CUG distribution specified by t, x.
+#(one-sided)
+
+##In this exercise, we want to determine whether the degree of transitivity of a given structure (observered network)
+#is greater than would be expected from its size and density alone, we perform an upper tail CUG test
+#of the transitivity score against the N, m distribution.
+
+#A high p-value for the associated test suggests that the observed graph is NOT more transitive than would be
+#anticipated from its size and density and, hence, that some additional process or contraint may be at work.
+
+
+q1a1<-cug.test(g,gtrans,cmode="size") 
 q1a1
 plot.cug.test(q1a1)
 
-#edges
+
+
+#edges: the same density
+##Note: this is an additional conditions: edges+size: it is a cumulative condition
 q1a2<-cug.test(g,gtrans,cmode="edges")
 q1a2
 plot.cug.test(q1a2)
 
 #dyad.census
+##similarlly, this is a cumulative condition based on edges+sizes
 q1a3<-cug.test(g,gtrans,cmode="dyad.census")
 q1a3
 plot.cug.test(q1a3)
