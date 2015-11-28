@@ -48,6 +48,10 @@ estuaryNet
 windows()
 plot(estuaryNet, displaylabels=T,edge.col="grey50",xpd=T)
 
+library(colorRamps)
+
+cols <- blue2red(10)[rank(attributes)] ##specify the color by logic (rank by dwnom)
+plot(estuaryNet, displaylabels=T, vertex.col=cols,edge.col="grey50",xpd=T)
 
 # ergm with simple trust homophily
 est1 <- ergm(estuaryNet~edges+absdiff("trust")) ##DV: binary cosponsor network; IV: edges: as intercepts; IV of interests: absdiff - difference of the ideology
