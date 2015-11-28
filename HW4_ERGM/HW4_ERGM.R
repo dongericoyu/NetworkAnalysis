@@ -14,7 +14,30 @@ attributes <- read.csv("Cape_Fear_Attributes.csv", header = T)
 # Read in vertex attribute data
 estuaryNet <- network(capefear)
 
-set.vertex.attribute(estuaryNet,names(attributes),attributes) ###Questions: how to separates the three atributes???????
+
+TrustDist <- as.matrix(dist(attributes[,1]))
+
+Policy <- as.matrix(dist(attributes[,2]))
+
+Govact <- as.matrix(dist(attributes[,3]))
+
+# Create Sender covariate
+# Building matrix column by column
+# element ij is i's value
+ideoSend <- matrix(dwnom[,1],nrow(dwnom),nrow(dwnom),byrow=F)
+
+# Create Receiver covariate
+# Building matrix row by row
+# element ij is j's value
+ideoRec <- matrix(dwnom[,1],nrow(dwnom),nrow(dwnom),byrow=T)
+
+
+set.vertex.attribute(estuaryNet,attrname="trust",val=attributes) ###Questions: how to separates the three atributes???????
+
+set.vertex.attribute(estuaryNet,attrname="prodev",val=attributes) ###Questions: how to separates the three atributes???????
+
+set.vertex.attribute(estuaryNet,attrname="govact",val=attributes) ###Questions: how to separates the three atributes???????
+
 
 set.network.attribute(estuaryNet,"capefear",as.matrix(capefear))
 
@@ -59,6 +82,7 @@ mcmc.diagnostics(est3)
 
 ##adding sender's ideology and receiver's ideology
 
-
+est4 <- ergm(estuaryNet~edges+absdiff("trust")+istar(2)+istar(2)+edgecov(TrustDist)+nodeocov("trust")+nodeicov("trust"))
+summary(est4)
 
 mcmc.diagnostics(est4)
